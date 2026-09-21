@@ -47,8 +47,8 @@ public class SpawnManager : MonoBehaviour
     {
         totalTime += Time.deltaTime;
         SpawnSpikey();
-        spawnBarry();
-        spawnExtralife();
+        SpawnBarry();
+        SpawnExtraLife();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -85,24 +85,22 @@ public class SpawnManager : MonoBehaviour
         newSpawn = new Vector2(0, randomPosY);
         spawn = spawnPosition + newSpawn;
 
-        if (spikeySpawned == false)
-
+        if (!spikeySpawned)
         {
 
             spikey = Instantiate(spikeyPrefab, spawn, Quaternion.identity);
             spikeySpawned = true;
             counter++;
-
         }
 
 
     }
-    void spawnBarry()
+    void SpawnBarry()
     {
         newSpawn = new Vector2(0, -4.3f);
         spawn = spawnPosition + newSpawn;
-
-        if (barrySpawned == false && totalTime > timeToSpawn)
+        
+        if (!barrySpawned && totalTime > timeToSpawn)
         {
             barry = Instantiate(barryPrefab, spawn, Quaternion.identity);
             barrySpawned = true;
@@ -110,7 +108,7 @@ public class SpawnManager : MonoBehaviour
             counter++;
         }
     }
-    void spawnExtralife()
+    void SpawnExtraLife()
     {
         randomPosY = Random.Range(-3.63f, 1f);
 
