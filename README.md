@@ -34,7 +34,7 @@ El personaje corre automáticamente hacia adelante — el único input del jugad
 3. Abrí la escena principal: `Assets/Scenes/MainMenu.unity`.
 4. Play.
 
-   O jugalo en Itchio : 
+   O jugalo en Itchio : https://sueni.itch.io/space-runner
 ---
 
 ## 👤 Créditos
