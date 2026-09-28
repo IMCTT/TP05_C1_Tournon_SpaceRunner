@@ -1,9 +1,8 @@
 using Player;
-using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class UiManager : MonoBehaviour
@@ -84,10 +83,7 @@ public class UiManager : MonoBehaviour
     {
         
         audioSourceButton.Play();
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        SceneManager.LoadScene("MainMenu");
 
 
     }
@@ -106,10 +102,7 @@ public class UiManager : MonoBehaviour
         lifeText.text = newLife.ToString("F0");
         if (newLife == 0)
         {
-            Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
