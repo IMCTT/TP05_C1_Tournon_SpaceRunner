@@ -19,6 +19,7 @@ El personaje corre automáticamente hacia adelante — el único input del jugad
 - El jugador comienza con **5 vidas**.
 - Al entrar en contacto con un **enemigo**, pierde **1 vida**.
 - Al agarrar un **power-up**, recupera **1 vida**.
+- Al agarrar un **power-up**, recupera **gana invincibilidad**.
 - Al llegar a 0 vidas, termina la partida (Game Over).
 
 ---
@@ -29,10 +30,11 @@ El personaje corre automáticamente hacia adelante — el único input del jugad
    ```bash
    git clone https://github.com/<usuario>/SpaceRunner.git
    ```
-2. Abrí el proyecto con **Unity <versión utilizada>** <!-- TODO: completar versión de Unity -->.
-3. Abrí la escena principal: `Assets/Scenes/MainScene.unity`.
+2. Abrí el proyecto con **Unity**
+3. Abrí la escena principal: `Assets/Scenes/MainMenu.unity`.
 4. Play.
 
+   O jugalo en Itchio : 
 ---
 
 ## 👤 Créditos
