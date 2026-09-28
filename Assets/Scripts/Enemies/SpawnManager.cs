@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject spikeyPrefab;
     [SerializeField] private GameObject barryPrefab;
     [SerializeField] private GameObject extralifePrefab;
+    [SerializeField] private GameObject invinciblePrefab;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject deSpawnPoint;
@@ -15,6 +16,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private LayerMask spikeyLayerMask;
     [SerializeField] private LayerMask barryLayerMask;
     [SerializeField] private LayerMask deSpawnLayerMask;
+    [SerializeField] private LayerMask invincibleLayerMask;
 
 
     [SerializeField] private float timeToSpawn;
@@ -23,14 +25,17 @@ public class SpawnManager : MonoBehaviour
 
     private GameObject spikey;
     private GameObject barry;
-    public GameObject extraLife;
+    private GameObject extraLife;
+    private GameObject invincible;
 
     private Vector2 spawnPosition;
     private Vector2 newSpawn;
     private bool spikeySpawned = false;
     private bool barrySpawned = false;
     private bool extraLifeSpawn = false;
+    private bool invincibiltySpawn = false;
     private int counter = 0;
+    private int invcounter;
     private float randomPosY;
     Vector2 spawn;
 
@@ -38,6 +43,7 @@ public class SpawnManager : MonoBehaviour
     {
         totalTime = 0;
         counter = 0;
+        invcounter = 0;
         spawnPosition = spawnPoint.transform.position;
 
     }
@@ -46,9 +52,11 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
+        
         SpawnSpikey();
         SpawnBarry();
         SpawnExtraLife();
+        SpawnInvincibility();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -74,6 +82,12 @@ public class SpawnManager : MonoBehaviour
             extraLifeSpawn = false;
 
         }
+        if (CheckLayerInMask2(invincibleLayerMask, other.gameObject.layer))
+        {
+            Destroy(invincible);
+            invincibiltySpawn = false;
+
+        }
 
     }
 
@@ -91,6 +105,7 @@ public class SpawnManager : MonoBehaviour
             spikey = Instantiate(spikeyPrefab, spawn, Quaternion.identity);
             spikeySpawned = true;
             counter++;
+            invcounter++;
         }
 
 
@@ -106,12 +121,12 @@ public class SpawnManager : MonoBehaviour
             barrySpawned = true;
             totalTime = 0;
             counter++;
+            invcounter++;
         }
     }
     void SpawnExtraLife()
     {
         randomPosY = Random.Range(-3.63f, 1f);
-
         newSpawn = new Vector2(0, randomPosY);
         spawn = spawnPosition + newSpawn;
 
@@ -123,6 +138,23 @@ public class SpawnManager : MonoBehaviour
             extraLifeSpawn = true;
 
             counter= 0;
+        }
+    }
+    void SpawnInvincibility()
+    {
+        randomPosY = Random.Range(-3.63f, 1f);
+        newSpawn = new Vector2(0, randomPosY);
+        spawn = spawnPosition + newSpawn;
+
+        if ( invcounter >= 5 && invincibiltySpawn == false)
+        {
+            
+            invincible = Instantiate(invinciblePrefab, spawn, Quaternion.identity);
+            Debug.Log("invincible");
+
+            invincibiltySpawn = true;
+            invcounter = 0;
+
         }
     }
 
